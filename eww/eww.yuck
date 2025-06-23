@@ -1,0 +1,10 @@
+(include "./modules/bar/eww.yuck")
+
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :anchor "top center" :x 0 :y 0 :width "100%" :height "40px")
+  :windowtype "dock"
+  :reserve (struts :side "top" :distance "40px")
+  (bar)
+)
+

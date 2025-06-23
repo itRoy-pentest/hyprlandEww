@@ -1,0 +1,48 @@
+(defwidget icon_group [icon children]
+  (box :class "icon-group"
+    (button :class "icon-btn" icon)
+  )
+)
+
+(defwidget power_button []
+  (defvar power_hover false)
+
+  (box :class "icon-group"
+       :onmouseenter "eww update power_hover=true"
+       :onmouseleave "eww update power_hover=false"
+
+    (button :class "icon-btn" "⏻")
+
+    (box :class "sub-menu-container"
+         :visible power_hover
+         :attributes (if power_hover "revealed")
+
+      (box :class "sub-menu"
+        (button :class "icon-btn" :onclick "systemctl reboot" "↻")
+        (button :class "icon-btn" :onclick "pkill -KILL -u $USER" "🚪")
+        (button :class "icon-btn" :onclick "hyprctl dispatch exit" "🔄")
+        (button :class "icon-btn" :onclick "systemctl poweroff" "⏼")
+      )
+    )
+  )
+)
+
+(defwidget bar []
+  (box :class "bar"
+       :space-evenly false
+       :halign "fill"
+
+    (box :class "icon-section"
+      (icon_group :icon "🌐" :children false)
+      (icon_group :icon "🔊" :children false)
+    )
+
+    (box :hexpand true)
+
+    (box :class "icon-section"
+      (icon_group :icon "⚙️" :children false)
+      (power_button)
+    )
+  )
+)
+
