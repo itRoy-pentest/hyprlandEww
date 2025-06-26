@@ -1,0 +1,63 @@
+; Hyprwwland Copyright (c) 2023 darkmaster grm34.
+; https://github.com/grm34/Hyprwwland
+
+
+(defvar taskmenu_tabs '[
+  {"class": "tab-off", "visible": "false", "id": "0", "icon": " "},
+  {"class": "tab-off", "visible": "false", "id": "1", "icon": "󰈈 "},
+  {"class": "tab-off", "visible": "false", "id": "2", "icon": " "},
+  {"class": "tab-off", "visible": "false", "id": "3", "icon": " "},
+  {"class": "tab-off", "visible": "false", "id": "4", "icon": "󰛳 "},
+  {"class": "tab-off", "visible": "false", "id": "5", "icon": " "},
+  {"class": "tab-off", "visible": "false", "id": "6", "icon": "⏻ "}]'
+)
+
+
+(defwidget tabs []
+  (box :class "taskmenu_tabs"
+       :orientation "v"
+       :spacing 10
+
+    (for tab in taskmenu_tabs
+      (button :class {tab.class}
+              :timeout "1s"
+              :onclick "scripts/taskmenu_manager ${tab.id}"
+        (label :text {tab.icon}
+               :style "font-size: 24px")
+    ))
+))
+
+
+(defwidget content []
+  (box :class "taskmenu_content"
+       :orientation "v"
+       :space-evenly false
+
+    (box :space-evenly false
+         :spacing 20
+      (button :halign "start"
+              :onclick "${EWW_CMD} close taskmenu"
+        (label :text {icon.close}
+               :style "font-size: 14px"))
+      (label :text "Taskbar settings"))
+
+    (tm_updates)
+    (tm_standby)
+    (tm_settings)
+    (tm_sound)
+    (tm_network)
+    (tm_calendar)
+    (tm_power)
+))
+
+
+(defwidget taskmenu []
+  (box :class "taskmenu"
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 30
+
+      (content)
+      (tabs)
+)))
+

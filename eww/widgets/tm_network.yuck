@@ -1,0 +1,5 @@
+(defwidget tm_network []
+  (label :visible {taskmenu_tabs[4].visible}
+         :text "testing: network tab")
+)
+

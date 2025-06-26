@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Hyprwwland Copyright (c) 2023 darkmaster grm34.
+# https://github.com/grm34/Hyprwwland
+
+
+function eww_update() {
+  : "$(eww get workspaces)"
+  printf '%s' "$_" | jaq -c --arg value "$1" "$2"
+}
+
+
+function update_occupied_workspaces() {
+  local occupied id
+  readarray -t occupied < <(hyprctl workspaces -j | jaq '.[]?.id?')
+  for id in "${occupied[@]}"; do
+    if [[ $id != "$1" ]]; then
+      id=$((id-1))
+      eww_update "ws-occupied" "(.[$id].class|=\$value)"
+    fi
+  done
+}
+
+
+function update_on_start() {
+  local active id
+  active="$(hyprctl monitors -j | jaq '.[].activeWorkspace.id')"
+  id=$((active-1))
+  eww_update "ws-active" "(.[$id].class|=\$value)"
+  update_occupied_workspaces "$active"
+}
+
+
+function handle() {
+  case $1 in
+    workspace*|createworkspace*)
+      : $((${1##*>>}-1))
+      eww_update "ws-active" "(.[$_].class|=\$value)"
+      update_occupied_workspaces "${1##*>>}"
+      ;;
+    destroyworkspace*)
+      : $((${1##*>>}-1))
+      eww_update "ws-inactive" "(.[$_].class|=\$value)"
+      ;;
+  esac
+}
+
+
+update_on_start
+# Listen hyprland socket for events.
+sock="/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+socat -U - UNIX-CONNECT:"$sock" | while read -r line; do
+  handle "$line"
+done
+

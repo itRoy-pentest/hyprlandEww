@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Hyprwwland Copyright (c) 2023 darkmaster grm34.
+# https://github.com/grm34/Hyprwwland
+
+
+# Get required settings from config.json.
+readarray -t config < <(
+  jaq '.suspend_timeout,
+       .sleep_timeout,
+       .lock_effects,
+       .standby_wallpaper' "$PWD/config.json")
+
+
+# Run swayidle with hyprctl.
+function activate_standby_mode() {
+  if ! pidof -sxq swayidle; then
+	  swayidle timeout "${config[0]//\"}" \
+    "swaylock -F -e ${config[2]//\"} -i ${config[3]//\"}" \
+    timeout "${config[1]//\"}" "hyprctl dispatch dpms off" \
+    resume "hyprctl dispatch dpms on" &
+  fi
+}
+
+
+# Handle requests.
+case $1 in
+  on)
+    eww update standby=true
+    activate_standby_mode
+    ;;
+	off)
+    eww update standby=false
+    pkill -f -9 swayidle
+    ;;
+  *)
+    : "$(eww get standby)"
+    if [[ $_ == "true" ]]; then
+      activate_standby_mode
+      printf '%s' "true"
+    else
+      printf '%s' "false"
+    fi
+    ;;
+esac
+
