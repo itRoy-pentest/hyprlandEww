@@ -1,9 +1,33 @@
-/* Hyprwwland Copyright (c) 2023 darkmaster grm34.
- * https://github.com/grm34/Hyprwwland
- */
-
 * {
-  all: unset;
+  all: unset; // Unsets everything so you can style everything from scratch
 }
 
-@import "style/main.scss";
+// Global Styles
+.bar {
+  border-radius: 10px;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.workspaces button:hover {
+  color: #00ccff;
+}
+
+.powermenu {
+  background-color: #000000;
+  padding: 5px;
+  //border-radius: 20px;
+  //box-shadow: 0 0 10px rgba(59, 54, 54, 0.5);
+}
+
+.powermenu button {
+  font-size: 15px;
+  color: #ffffff;
+  background: transparent;
+  border: none;
+}
+
+.powermenu button:hover {
+  color: #00ccff;
+}

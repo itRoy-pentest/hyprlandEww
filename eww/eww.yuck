@@ -1,66 +1,29 @@
-; Hyprwwland Copyright (c) 2023 darkmaster grm34.
-; https://github.com/grm34/Hyprwwland
+(include "assets/workspaces.yuck")
+(include "assets/powerbutton.yuck")
+
+(defwidget bar []
+  (centerbox :orientation "h"
+    (workspaces)
+    (box)
+    (sidestuff)
+  ))
 
 
-; Config.
-(defpoll hww :interval "60m" :initial "{}"
-  "cat config.json"
-)
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    ; Используем powerbutton из подключенного файла
+    (powermenu)
+  ))
 
-; Icons.
-(defpoll icon :interval "60m" :initial "{}"
-  "cat style/symbols.json"
-)
-
-; Widgets.
-(include "widgets/dock.yuck")
-(include "widgets/workbar.yuck")
-(include "widgets/mainbar.yuck")
-(include "widgets/taskbar.yuck")
-(include "widgets/taskmenu.yuck")
-(include "widgets/tm_updates.yuck")
-(include "widgets/tm_sound.yuck")
-(include "widgets/tm_network.yuck")
-(include "widgets/tm_calendar.yuck")
-(include "widgets/tm_power.yuck")
-
-
-; Bar.
-(defwindow bar :monitor 0
-               :stacking "fg"
-               :exclusive true
-               :focusable false
-               :geometry (geometry :x "0%" :y "0%"
-                                   :width "99%" :height "0%"
-                                   :anchor "top center")
-  (centerbox
-    (workbar :halign "start")
-    (mainbar :halign "center")
-    (taskbar :halign "end")
-  )
-)
-
-
-; Dock.
-(defwindow dock :monitor 0
-                :stacking "fg"
-                :exclusive true
-                :focusable false
-                :geometry (geometry :x "0%" :y "0%"
-                                    :width "0%" :height "0%"
-                                    :anchor "left center")
-  (dock)
-)
-
-
-; Taskmenu.
-(defwindow taskmenu :monitor 0
-                    :stacking "fg"
-                    :exclusive false
-                    :focusable false
-                    :geometry (geometry :x "1%" :y "1%"
-                                        :width "0%" :height "0%"
-                                        :anchor "top right")
-  (taskmenu)
-)
-
+(defwindow bar
+  :class "statusbar"
+  :monitor 0
+  :windowtype "dock"
+  :exclusive true
+  :geometry (geometry :x "0%"
+                      :y "0.5%"
+                      :width "98%"
+                      :height "5px"
+                      :anchor "top center")
+  :reserve (struts :side "top" :distance "4%")
+  (bar))

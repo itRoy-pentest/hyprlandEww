@@ -1,4 +1,0 @@
-(defwidget tm_battery []
-  (label :visible {taskmenu_tabs[6].visible}
-         :text "testing: battery")
-)
