@@ -2,9 +2,22 @@
   all: unset; // Unsets everything so you can style everything from scratch
 }
 
+$background: #1A1B26;
+$foreground: #A9B1D6;
+
+$black: #24283B;
+$gray: #565F89;
+$red: #F7768E;
+$green: #73DACA;
+$yellow: #E0AF68;
+$blue: #7AA2F7;
+$magenta: #BB9AF7;
+$cyan: #7DCFFF;
+$white: $foreground;
+
 // Global Styles
 .bar {
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #000000;
   color: #ffffff;
   padding: 5px;
@@ -17,8 +30,8 @@
 .powermenu {
   background-color: #000000;
   padding: 5px;
-  //border-radius: 20px;
-  //box-shadow: 0 0 10px rgba(59, 54, 54, 0.5);
+  //border-radius: 15px;
+  //box-shadow: 10 10 10px rgba(255, 0, 0, 0.5);
 }
 
 .powermenu button {
@@ -31,3 +44,33 @@
 .powermenu button:hover {
   color: #00ccff;
 }
+
+// Calendar
+.calendar-box {
+  background-color: $black;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  
+  calendar {
+    color: $foreground;
+    
+    &:selected {
+      color: $blue;
+    }
+    
+    &.header {
+      color: $blue;
+      font-weight: bold;
+    }
+  }
+}
+.time {
+  font-family: "Iosevka Nerd Font";
+  font-size: 1.2em;
+  font-weight: bold;
+  color: $foreground;
+  padding: 0 10px;
+}
+

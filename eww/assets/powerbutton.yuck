@@ -1,29 +1,38 @@
-
 (defwidget powermenu []
-  (box :orientation "h"
-       :class "powermenu"
-       :halign "center"
-       :valign "center"
-       :spacing 20
-    
-    (button :class "powermenu-suspend"
-        :onclick "systemctl suspend"
-        "")
-            
-    (button :class "powermenu-lock"
-        :onclick "betterlockscreen -l"
-        "")
-            
-    (button :class "powermenu-logout"
-        :onclick "hyprctl dispatch exit"
-        "")
-            
-    (button :class "powermenu-reboot"
-        :onclick "reboot"
-        "")
-        
-    (button :class "powermenu-shutdown"
-            :onclick "poweroff"
-            "")
+  (eventbox :onhover "eww update power=true"
+            :onhoverlost "eww update power=false"
+    (box :orientation "h"
+         :class "powermenu"
+         :space-evenly "false" 	 
+	 :vexpand "false"
+        (revealer :transition "slideleft"
+                :reveal power
+                :duration "300ms"
+        (box :orientation "h"
+             :spacing 15
+             :space-evenly "false"
+          (button :class "powermenu-suspend"
+                  :onclick "systemctl suspend"
+                  "")
+                
+          (button :class "powermenu-lock"
+                  :onclick "betterlockscreen -l"
+                  "")
+                
+          (button :class "powermenu-logout"
+                  :onclick "hyprctl dispatch exit"
+                  "")
+                
+          (button :class "powermenu-reboot"
+                  :onclick "reboot"
+                  "")
+        )
+      )
+      
+      (button :class "powermenu-shutdown"
+              :onclick "poweroff"
+              "")
+    )
   )
 )
+(defvar power false)

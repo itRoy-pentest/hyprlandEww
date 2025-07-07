@@ -1,5 +1,6 @@
 (include "assets/workspaces.yuck")
 (include "assets/powerbutton.yuck")
+(include "assets/calendar.yuck")
 
 (defwidget bar []
   (centerbox :orientation "h"
@@ -13,6 +14,7 @@
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
     ; Используем powerbutton из подключенного файла
     (powermenu)
+    
   ))
 
 (defwindow bar

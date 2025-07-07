@@ -1,15 +1,28 @@
+(deflisten workspaces :initial '[
+  {"index": "1", "class": "ws-inactive", "icon": "1"},
+  {"index": "2", "class": "ws-inactive", "icon": "2"},
+  {"index": "3", "class": "ws-inactive", "icon": "3"},
+  {"index": "4", "class": "ws-inactive", "icon": "4"},
+  {"index": "5", "class": "ws-inactive", "icon": "5"},
+  {"index": "6", "class": "ws-inactive", "icon": "6"},
+  {"index": "7", "class": "ws-inactive", "icon": "7"},
+  {"index": "8", "class": "ws-inactive", "icon": "8"},
+  {"index": "9", "class": "ws-inactive", "icon": "9"}]'
+  "scripts/workspacesScript"
+)
+
+
 (defwidget workspaces []
   (box :class "workspaces"
        :orientation "h"
        :space-evenly true
        :halign "start"
        :spacing 10
-    (button :onclick "wmctrl -s 0" 1)
-    (button :onclick "wmctrl -s 1" 2)
-    (button :onclick "wmctrl -s 2" 3)
-    (button :onclick "wmctrl -s 3" 4)
-    (button :onclick "wmctrl -s 4" 5)
-    (button :onclick "wmctrl -s 5" 6)
-    (button :onclick "wmctrl -s 6" 7)
-    (button :onclick "wmctrl -s 7" 8)
-    (button :onclick "wmctrl -s 8" 9)))
+
+    (for ws in workspaces
+      (button :class {ws.class}
+              :onclick "hyprctl dispatch workspace ${ws.index}"
+        (label :text {ws.icon})
+    ))
+))
+
