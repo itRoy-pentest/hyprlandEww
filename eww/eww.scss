@@ -48,26 +48,47 @@ $white: $foreground;
 }
 
 // Calendar
-.calendar-box {
+.cal-box {
   background-color: $black;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 5px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
-  
-  calendar {
-    color: $foreground;
-    
-    &:selected {
-      color: $blue;
-    }
-    
-    &.header {
-      color: $blue;
-      font-weight: bold;
-    }
+  font-family: Comic Mono;
+  font-size: 1em;
+  font-weight: bold;
+  .cal-inner-box {
+      padding: 1rem 1rem .2rem;
+      background-color: $black;
+      .cal {
+          &.highlight {
+              padding: 10rem;
+          }
+
+          padding: .8rem .25rem 0rem;
+          margin-left: 10px;
+      }
   }
 }
+
+calendar:selected {
+  color: $blue;
+}
+
+calendar.header {
+color: $blue;
+font-weight: bold;
+}
+
+calendar.button {
+color: $magenta;
+}
+
+calendar.highlight {
+color: $magenta;
+font-weight: bold;
+}
+
+calendar:indeterminate {
+color: $gray;
+}
+
 .time {
   font-family: "Iosevka Nerd Font";
   font-size: 1.2em;
@@ -76,3 +97,7 @@ $white: $foreground;
   padding: 0 10px;
 }
 
+.volume-icon{
+  margin: .2rem 0 .2rem 0;
+  color: $green;
+}
