@@ -2,47 +2,49 @@
   all: unset; // Unsets everything so you can style everything from scratch
 }
 
-$background: #1A1B26;
-$foreground: #A9B1D6;
+$background: #000000;
+$foreground: #ffffff;
 
-$black: #24283B;
+$black: #000000;
 $gray: #565F89;
 $red: #F7768E;
 $green: #73DACA;
 $yellow: #E0AF68;
 $blue: #7AA2F7;
 $magenta: #BB9AF7;
-$cyan: #7DCFFF;
+$cyan: #00ccff;
 $white: $foreground;
 
 // Global Styles
 .bar {
   border-radius: 15px;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: $black;
+  color: $white;
   padding: 5px;
 }
 
 .workspaces button:hover {
-  color: #00ccff;
+  color: $cyan;
 }
 
+#workspaces button
+
 .powermenu {
-  background-color: #000000;
-  padding: 5px;
+  background-color: $black;
   //border-radius: 15px;
   //box-shadow: 10 10 10px rgba(255, 0, 0, 0.5);
 }
 
 .powermenu button {
   font-size: 15px;
-  color: #ffffff;
+  color: $white;
   background: transparent;
   border: none;
+  padding: 5px
 }
 
 .powermenu button:hover {
-  color: #00ccff;
+  color: $cyan;
 }
 
 // Calendar

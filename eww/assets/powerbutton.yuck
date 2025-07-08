@@ -9,7 +9,6 @@
                 :reveal power
                 :duration "300ms"
         (box :orientation "h"
-             :spacing 15
              :space-evenly "false"
           (button :class "powermenu-suspend"
                   :onclick "systemctl suspend"
